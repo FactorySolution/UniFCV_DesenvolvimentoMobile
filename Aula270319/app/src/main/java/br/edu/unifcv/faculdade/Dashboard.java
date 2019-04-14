@@ -1,4 +1,4 @@
-package br.edu.unifcv.faculdade.views;
+package br.edu.unifcv.faculdade;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,16 +6,14 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import br.edu.unifcv.faculdade.R;
-
-public class DashBoardActivity extends AppCompatActivity implements View.OnClickListener {
+public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dash_board);
+        setContentView(R.layout.activity_dashboard);
 
         // Criando os elementos de interface
         this.loadComponents();
@@ -42,15 +40,9 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
                 break;
             }
             case R.id.carCars: {
-                this.CreateCarsList();
                 break;
             }
         }
-    }
-
-    private void CreateCarsList() {
-        Intent i = new Intent(this, CarrosActivity.class);
-        startActivity(i);
     }
 
     private void createConversor() {
