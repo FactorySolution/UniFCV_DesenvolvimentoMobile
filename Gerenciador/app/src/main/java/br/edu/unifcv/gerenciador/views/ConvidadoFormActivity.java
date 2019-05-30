@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import br.edu.unifcv.gerenciador.R;
+import br.edu.unifcv.gerenciador.constants.ConvidadoConstants;
 import br.edu.unifcv.gerenciador.model.Convidado;
 import br.edu.unifcv.gerenciador.service.ConvidadoService;
 
@@ -42,11 +43,11 @@ public class ConvidadoFormActivity extends AppCompatActivity {
         guestEntity.setNome(this.mViewHolder.mEditName.getText().toString());
 
         if (this.mViewHolder.mRadioNotConfirmed.isChecked()) {
-            guestEntity.setPresenca(0);
+            guestEntity.setPresenca(ConvidadoConstants.CONFIRMACAO.NAO_CONFIRMADO);
         } else if (this.mViewHolder.mRadioPresent.isChecked()) {
-            guestEntity.setPresenca(1);
+            guestEntity.setPresenca(ConvidadoConstants.CONFIRMACAO.PRESENTE);
         } else {
-            guestEntity.setPresenca(2);
+            guestEntity.setPresenca(ConvidadoConstants.CONFIRMACAO.AUSENTE);
         }
         // Salva entidade no banco
         this.mConvidadoService.insert(guestEntity);

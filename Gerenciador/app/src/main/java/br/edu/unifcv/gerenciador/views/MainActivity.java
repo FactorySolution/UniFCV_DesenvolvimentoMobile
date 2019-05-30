@@ -15,10 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-
 import br.edu.unifcv.gerenciador.R;
-import br.edu.unifcv.gerenciador.model.Convidado;
-import br.edu.unifcv.gerenciador.service.ConvidadoService;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {

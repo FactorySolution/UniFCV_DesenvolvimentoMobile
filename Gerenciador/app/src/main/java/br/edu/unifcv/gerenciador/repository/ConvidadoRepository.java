@@ -2,7 +2,11 @@ package br.edu.unifcv.gerenciador.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.unifcv.gerenciador.constants.DataBaseConstants;
 import br.edu.unifcv.gerenciador.model.Convidado;
@@ -37,5 +41,31 @@ public class ConvidadoRepository {
         }
 
         return true;
+    }
+
+    public List<Convidado> getConvidadoByQuery(String sql) {
+        List<Convidado> convidados = new ArrayList<>();
+        try {
+            SQLiteDatabase db = this.dataBaseHelper.getReadableDatabase();
+            Cursor cursor = db.rawQuery(sql, null);
+            if (cursor != null && cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    Convidado convidado = new Convidado();
+                    convidado.setId(cursor.getInt(cursor.getColumnIndexOrThrow(
+                            DataBaseConstants.CONVIDADO.COLUMNS.ID)));
+                    convidado.setNome(cursor.getString(cursor.getColumnIndexOrThrow(
+                            DataBaseConstants.CONVIDADO.COLUMNS.NOME)));
+                    convidado.setPresenca(cursor.getInt(cursor.getColumnIndexOrThrow(
+                            DataBaseConstants.CONVIDADO.COLUMNS.PRESENCA)));
+                    convidados.add(convidado);
+                }
+                cursor.close();
+            }
+
+        } catch (Exception e) {
+            return convidados;
+        }
+
+        return convidados;
     }
 }
