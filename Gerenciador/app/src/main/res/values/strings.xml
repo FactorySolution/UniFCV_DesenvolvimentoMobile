@@ -18,4 +18,8 @@
     <string name="presente">Presente</string>
     <string name="ausente">Ausente</string>
     <string name="salvar">Salvar</string>
+    <string name="remover_convidado">Remover Convidado</string>
+    <string name="pergunta_remover_convidado">Deseja realmente excluir o convidado?</string>
+    <string name="excluir_convidado">Excluir</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

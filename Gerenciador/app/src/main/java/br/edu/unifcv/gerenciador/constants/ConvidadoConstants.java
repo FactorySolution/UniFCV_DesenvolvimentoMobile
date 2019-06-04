@@ -7,4 +7,8 @@ public class ConvidadoConstants {
         public static final int PRESENTE = 1;
         public static final int AUSENTE = 2;
     }
+
+    public static class BundleConstants {
+        public static final String CONVIDADO_ID = "convidado_id";
+    }
 }
