@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.unifcv.gerenciador.constants.ConvidadoConstants;
 import br.edu.unifcv.gerenciador.constants.DataBaseConstants;
 import br.edu.unifcv.gerenciador.model.Convidado;
+import br.edu.unifcv.gerenciador.model.ConvidadosCount;
 import br.edu.unifcv.gerenciador.repository.base.DataBaseHelper;
 
 public class ConvidadoRepository {
@@ -67,5 +69,48 @@ public class ConvidadoRepository {
         }
 
         return convidados;
+    }
+
+    public ConvidadosCount getCount() {
+        ConvidadosCount convidadosCount = new ConvidadosCount(0, 0, 0);
+        Cursor cursor;
+        try {
+            SQLiteDatabase db = this.dataBaseHelper.getReadableDatabase();
+                cursor = db.rawQuery("select count(*) from "
+                            + DataBaseConstants.CONVIDADO.TABLE_NAME + " where "
+                            + DataBaseConstants.CONVIDADO.COLUMNS.PRESENCA + " = "
+                            + ConvidadoConstants.CONFIRMACAO.PRESENTE,
+                    null);
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                convidadosCount.setPresente(cursor.getInt(0));
+                cursor.close();
+            }
+
+            cursor = db.rawQuery("select count(*) from "
+                            + DataBaseConstants.CONVIDADO.TABLE_NAME + " where "
+                            + DataBaseConstants.CONVIDADO.COLUMNS.PRESENCA + " = "
+                            + ConvidadoConstants.CONFIRMACAO.AUSENTE,
+                    null);
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                convidadosCount.setAusente(cursor.getInt(0));
+                cursor.close();
+            }
+
+            cursor = db.rawQuery("select count(*) from "
+                            + DataBaseConstants.CONVIDADO.TABLE_NAME,
+                    null);
+            if (cursor != null && cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                convidadosCount.setTodos(cursor.getInt(0));
+                cursor.close();
+            }
+
+
+            return convidadosCount;
+        } catch (Exception e) {
+            return convidadosCount;
+        }
     }
 }

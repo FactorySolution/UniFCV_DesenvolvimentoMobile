@@ -19,6 +19,7 @@ import br.edu.unifcv.gerenciador.adapter.ConvidadoAdapter;
 import br.edu.unifcv.gerenciador.constants.ConvidadoConstants;
 import br.edu.unifcv.gerenciador.listener.OnConvidadoListener;
 import br.edu.unifcv.gerenciador.model.Convidado;
+import br.edu.unifcv.gerenciador.model.ConvidadosCount;
 import br.edu.unifcv.gerenciador.service.ConvidadoService;
 
 public class TodosFragment extends Fragment {
@@ -89,9 +90,10 @@ public class TodosFragment extends Fragment {
     }
 
     private void loadDashBoard() {
-        this.mViewHolder.mTextPresente.setText("0");
-        this.mViewHolder.mTextAusente.setText("0");
-        this.mViewHolder.mTextTodos.setText("0");
+        ConvidadosCount convidadosCount = mConvidadoService.count();
+        this.mViewHolder.mTextPresente.setText(String.valueOf(convidadosCount.getPresente()));
+        this.mViewHolder.mTextAusente.setText(String.valueOf(convidadosCount.getAusente()));
+        this.mViewHolder.mTextTodos.setText(String.valueOf(convidadosCount.getTodos()));
     }
 
     private static class ViewHolder {

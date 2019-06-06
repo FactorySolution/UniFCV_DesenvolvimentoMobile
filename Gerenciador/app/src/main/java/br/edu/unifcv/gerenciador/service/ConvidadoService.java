@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.edu.unifcv.gerenciador.constants.DataBaseConstants;
 import br.edu.unifcv.gerenciador.model.Convidado;
+import br.edu.unifcv.gerenciador.model.ConvidadosCount;
 import br.edu.unifcv.gerenciador.repository.ConvidadoRepository;
 
 public class ConvidadoService {
@@ -24,5 +25,9 @@ public class ConvidadoService {
         return this.convidadoRepository.getConvidadoByQuery("select * from " +
                 DataBaseConstants.CONVIDADO.TABLE_NAME);
 
+    }
+
+    public ConvidadosCount count() {
+        return this.convidadoRepository.getCount();
     }
 }
